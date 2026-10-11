@@ -402,8 +402,3 @@ function showCampusRecord(name) {
 
 loadCampusPlants();
 // STILL INCOMPLETE, PROGRESS AS OF 2026-10-12
-const logBox = document.getElementById("log");
-let specimens = [];
-
-function loadLog() {
-  const saved = localStorage.getItem("hardinid_log");
