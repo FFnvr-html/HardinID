@@ -350,10 +350,6 @@ function startOver() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function saveToLog() {
-  console.log("log comes in chunk 7");
-}
-
 let campusPlants = [];
 
 async function loadCampusPlants() {
@@ -405,3 +401,9 @@ function showCampusRecord(name) {
 }
 
 loadCampusPlants();
+// STILL INCOMPLETE, PROGRESS AS OF 2026-10-12
+const logBox = document.getElementById("log");
+let specimens = [];
+
+function loadLog() {
+  const saved = localStorage.getItem("hardinid_log");
