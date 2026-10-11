@@ -1,13 +1,4 @@
-/* ============================================================
-   HARDINID styles
-   Sections: 1 colors  2 base  3 header  4 ribbon  5 capture panel
-             6 readout  7 campus record  8 specimen log  9 footer
-   ============================================================ */
 
-/* ---------- 1. COLORS ----------
-   Every color is a variable. Light values live in :root,
-   dark values in body.dark. Switching themes = adding or
-   removing the "dark" class on <body>. */
 :root{
   --pine:#14532d;
   --pine-deep:#0e3a20;
@@ -46,7 +37,6 @@ body.dark{
   --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.45);
 }
 
-/* ---------- 2. BASE ---------- */
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:#0e120d}
 body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;min-height:100vh;line-height:1.5}
@@ -54,7 +44,6 @@ body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans
 .hidden{display:none!important}
 input[type=file]{display:none}
 
-/* ---------- 3. HEADER ---------- */
 header{padding:26px 0 18px;text-align:center;position:relative}
 .crest{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--pine);font-weight:500}
 h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--pine-deep);margin:6px 0 2px;line-height:1}
@@ -64,14 +53,12 @@ h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-
 .theme-toggle:hover{border-color:var(--pine);color:var(--pine)}
 .theme-toggle:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
 
-/* ---------- 4. STATS RIBBON ---------- */
 .ribbon{display:flex;align-items:stretch;gap:1px;background:var(--pine-line);border:1px solid var(--pine-line);border-radius:12px;overflow:hidden;margin-top:18px}
 .ribbon .cell{flex:1;background:var(--paper-raised);padding:12px 10px;text-align:center}
 .ribbon .num{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;color:var(--pine-deep);line-height:1}
 .ribbon .num.accuracy{color:var(--signal-strong)}
 .ribbon .lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:5px}
 
-/* ---------- 5. CAPTURE PANEL ---------- */
 .panel{background:var(--paper-raised);border:1px solid var(--pine-line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:16px;overflow:hidden}
 .panel-head{padding:14px 16px 0;display:flex;align-items:center;justify-content:space-between}
 .panel-head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
@@ -81,7 +68,6 @@ h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-
 .stage .placeholder{color:#9db8a5;text-align:center;padding:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.03em;line-height:1.7}
 .stage .placeholder svg{margin-bottom:10px;opacity:.65}
 
-/* Corner brackets over the live camera view */
 .reticle{position:absolute;inset:0;pointer-events:none;background:
   linear-gradient(var(--reticle) 0 0) 0 0/14px 1px no-repeat,
   linear-gradient(var(--reticle) 0 0) 0 0/1px 14px no-repeat,
@@ -93,7 +79,6 @@ h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-
   linear-gradient(var(--reticle) 0 0) 100% 100%/1px 14px no-repeat;
   --reticle:rgba(255,255,255,.5);margin:12px}
 
-/* Organ picker. The selected one has aria-pressed="true" */
 .organs{display:flex;flex-wrap:wrap;gap:7px;padding:14px 16px 0}
 .organ{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;padding:7px 12px;border:1px solid var(--pine-line);border-radius:999px;background:var(--paper);color:var(--ink-soft);cursor:pointer;transition:.15s;user-select:none}
 .organ[aria-pressed="true"]{background:var(--pine);color:#fff;border-color:var(--pine)}
@@ -109,7 +94,6 @@ button.btn.primary:hover{background:var(--pine-deep)}
 button.btn:disabled{opacity:.45;cursor:not-allowed}
 button.btn:focus-visible{outline:2px solid var(--pine-deep);outline-offset:2px}
 
-/* ---------- 6. READOUT ---------- */
 .readout{margin-top:16px}
 .conf-block{padding:16px}
 .conf-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
@@ -124,7 +108,6 @@ button.btn:focus-visible{outline:2px solid var(--pine-deep);outline-offset:2px}
 .common{font-size:14px;color:var(--ink-soft);margin-top:3px}
 .family-tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--pine-line);border-radius:6px;padding:3px 7px;margin-top:10px}
 
-/* Other candidates */
 .stack{border-top:1px solid var(--pine-line);margin-top:16px}
 .stack .stack-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:14px 16px 8px}
 .cand{display:flex;align-items:center;gap:12px;padding:9px 16px}
@@ -133,7 +116,6 @@ button.btn:focus-visible{outline:2px solid var(--pine-deep);outline-offset:2px}
 .cand .cand-name{font-family:'IBM Plex Mono',monospace;font-style:italic;font-size:12.5px;color:var(--ink-soft);flex:0 0 44%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cand .cand-pct{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-faint);flex:0 0 40px;text-align:right}
 
-/* Field check buttons */
 .verify{border-top:1px solid var(--pine-line);padding:14px 16px 16px;background:var(--verify-bg)}
 .verify .q{font-size:12.5px;color:var(--ink-soft);margin-bottom:10px}
 .verify .q b{color:var(--ink);font-weight:600}
@@ -150,7 +132,6 @@ body.dark .vbtn.on{color:#0e120d}
 .status{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-faint);text-align:center;padding:14px;letter-spacing:.02em;line-height:1.6}
 .status.err{color:var(--amber)}
 
-/* ---------- 7. CAMPUS RECORD (new) ---------- */
 .campus{border-color:var(--pine)}
 .campus-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:var(--pine);color:#fff;border-radius:999px;padding:4px 10px}
 body.dark .campus-badge{color:#0e120d}
@@ -164,7 +145,6 @@ body.dark .campus-badge{color:#0e120d}
 .campus-desc{font-size:13.5px;color:var(--ink-soft);margin-top:12px;line-height:1.6}
 .campus-loc{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);margin-top:12px;letter-spacing:.02em}
 
-/* ---------- 8. SPECIMEN LOG ---------- */
 .log-head{display:flex;align-items:baseline;justify-content:space-between;margin:30px 0 12px}
 .log-head h2{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;color:var(--pine-deep);letter-spacing:-.01em}
 .log-head .count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint)}
@@ -183,7 +163,6 @@ body.dark .campus-badge{color:#0e120d}
 .sp-del{flex:0 0 auto;background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:16px;padding:4px 6px;line-height:1;border-radius:6px}
 .sp-del:hover{color:var(--amber)}
 
-/* ---------- 9. FOOTER ---------- */
 footer{text-align:center;padding:34px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--ink-faint);line-height:1.8}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}

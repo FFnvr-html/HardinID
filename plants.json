@@ -1,0 +1,23 @@
+[
+  {
+    "scientificName": "Pterocarpus indicus",
+    "commonName": "Narra",
+    "origin": "native",
+    "description": "Placeholder description. To be replaced with the group's own write-up.",
+    "photo": ""
+  },
+  {
+    "scientificName": "Mangifera indica",
+    "commonName": "Mango",
+    "origin": "introduced",
+    "description": "To be done later :))",
+    "photo": ""
+  },
+  {
+    "scientificName": "Medinilla magnifica",
+    "commonName": "Kapa-kapa",
+    "origin": "endemic",
+    "description": "Placeholder description. To be replaced with the group's own write-up.",
+    "photo": ""
+  }
+]
