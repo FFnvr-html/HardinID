@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HardinID | Campus Plant Identification</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- class="dark" makes dark mode the default. app.js removes it if the user picked light. -->
+<body class="dark">
+<div class="wrap">
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀</button>
+    <div class="crest">De La Salle University · Dasmariñas</div>
+    <h1 id="app-name">HardinID</h1>
+    <div class="tagline">campus plant identification</div>
+    <div class="rule"></div>
+
+    <!-- Session stats. Filled in by app.js -->
+    <div class="ribbon" id="ribbon">
+      <div class="cell"><div class="num" id="stat-total">0</div><div class="lbl">Identified</div></div>
+      <div class="cell"><div class="num accuracy" id="stat-acc">—</div><div class="lbl">User-confirmed</div></div>
+      <div class="cell"><div class="num" id="stat-conf">—</div><div class="lbl">Mean confidence</div></div>
+    </div>
+  </header>
+
+  <!-- ============ 01 CAPTURE ============ -->
+  <section class="panel">
+    <div class="panel-head"><span class="eyebrow">01 · Specimen capture</span></div>
+
+    <!-- The stage shows ONE of: placeholder, live video, or captured photo -->
+    <div class="stage" id="stage">
+      <div class="placeholder" id="placeholder">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2C7 7 7 13 12 22c5-9 5-15 0-20z"/><path d="M12 8v10" stroke-opacity=".5"/></svg>
+        No specimen loaded<br>Start the camera or upload a photo
+      </div>
+      <video id="video" class="hidden" autoplay playsinline muted></video>
+      <img id="preview" class="hidden" alt="captured specimen">
+      <div class="reticle hidden" id="reticle"></div>
+    </div>
+
+    <div class="panel-head" style="padding-top:14px"><span class="eyebrow">Organ in frame</span></div>
+    <div class="organs" id="organs">
+      <button class="organ" data-organ="auto" aria-pressed="true">auto</button>
+      <button class="organ" data-organ="leaf" aria-pressed="false">leaf</button>
+      <button class="organ" data-organ="flower" aria-pressed="false">flower</button>
+      <button class="organ" data-organ="fruit" aria-pressed="false">fruit</button>
+      <button class="organ" data-organ="bark" aria-pressed="false">bark</button>
+      <button class="organ" data-organ="habit" aria-pressed="false">whole plant</button>
+    </div>
+
+    <!-- Buttons here are created by app.js (they change depending on the step) -->
+    <div class="controls" id="controls"></div>
+  </section>
+
+  <!-- ============ 02 READOUT ============ -->
+  <section class="panel readout hidden" id="readout">
+    <div class="panel-head"><span class="eyebrow">02 · Identification readout</span></div>
+    <div id="readout-body"></div>
+  </section>
+
+  <!-- ============ 03 CAMPUS RECORD (new) ============ -->
+  <!-- Hidden until the identified species matches an entry in plants.json -->
+  <section class="panel campus hidden" id="campus">
+    <div class="panel-head">
+      <span class="eyebrow">03 · Campus record</span>
+      <span class="campus-badge">Found on DLSU-D</span>
+    </div>
+    <div id="campus-body"></div>
+  </section>
+
+  <!-- ============ SPECIMEN LOG ============ -->
+  <div class="log-head">
+    <h2>Specimen log</h2>
+    <span class="count" id="log-count"></span>
+  </div>
+  <div id="log"></div>
+
+  <footer>
+    Powered by Pl@ntNet · identifications are probabilistic<br>
+    Built for Practical Research 2 · DLSU-D Senior High School
+  </footer>
+</div>
+
+<!-- Hidden file picker, opened by the "Upload photo" button -->
+<input type="file" id="file" accept="image/*">
+
+<script src="app.js"></script>
+</body>
+</html>
