@@ -402,3 +402,130 @@ function showCampusRecord(name) {
 
 loadCampusPlants();
 // STILL INCOMPLETE, PROGRESS AS OF 2026-10-12
+const logBox = document.getElementById("log");
+let specimens = [];
+
+function loadLog() {
+  const saved = localStorage.getItem("hardinid_log");
+  if (saved !== null) {
+    specimens = JSON.parse(saved);
+  }
+}
+
+function storeLog() {
+  localStorage.setItem("hardinid_log", JSON.stringify(specimens));
+}
+
+function makeThumbnail() {
+  const size = 104;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+
+  const side = Math.min(preview.naturalWidth, preview.naturalHeight);
+  const x = (preview.naturalWidth - side) / 2;
+  const y = (preview.naturalHeight - side) / 2;
+  canvas.getContext("2d").drawImage(preview, x, y, side, side, 0, 0, size, size);
+
+  return canvas.toDataURL("image/jpeg", 0.7);
+}
+
+function saveToLog() {
+  let found = false;
+  for (let i = 0; i < specimens.length; i++) {
+    if (specimens[i].time === current.time) {
+      specimens[i].verdict = current.verdict;
+      found = true;
+    }
+  }
+
+  if (!found) {
+    current.thumbnail = makeThumbnail();
+    specimens.unshift(current);
+  }
+
+  storeLog();
+  showLog();
+  showStats();
+}
+
+function showLog() {
+  const count = document.getElementById("log-count");
+
+  if (specimens.length === 0) {
+    count.textContent = "";
+    logBox.innerHTML = '<div class="log-empty">Nothing logged yet.<br>Plants you identify and check will show up here.</div>';
+    return;
+  }
+
+  count.textContent = specimens.length + " logged";
+
+  let html = "";
+  for (let i = 0; i < specimens.length; i++) {
+    const s = specimens[i];
+
+    let dot = "dot-maybe";
+    if (s.verdict === "correct") {
+      dot = "dot-yes";
+    }
+    if (s.verdict === "incorrect") {
+      dot = "dot-no";
+    }
+
+    html += `
+      <div class="specimen">
+        <img src="${s.thumbnail}" alt="">
+        <div class="meta">
+          <div class="sp-name">${s.name}</div>
+          <div class="sp-sub"><span class="verdict-dot ${dot}"></span>${s.verdict} · ${s.common}</div>
+        </div>
+        <div class="sp-conf" style="color:${confidenceColor(s.percent)}">${s.percent}%</div>
+        <button class="sp-del" data-index="${i}" title="Remove">×</button>
+      </div>`;
+  }
+  logBox.innerHTML = html;
+
+  logBox.querySelectorAll(".sp-del").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      specimens.splice(Number(btn.dataset.index), 1);
+      storeLog();
+      showLog();
+      showStats();
+    });
+  });
+}
+
+function showStats() {
+  let correct = 0;
+  let checked = 0;
+  let totalPercent = 0;
+
+  for (let i = 0; i < specimens.length; i++) {
+    totalPercent += specimens[i].percent;
+    if (specimens[i].verdict === "correct") {
+      correct++;
+      checked++;
+    }
+    if (specimens[i].verdict === "incorrect") {
+      checked++;
+    }
+  }
+
+  let confirmed = "-";
+  if (checked > 0) {
+    confirmed = Math.round(correct / checked * 100) + "%";
+  }
+
+  let mean = "-";
+  if (specimens.length > 0) {
+    mean = Math.round(totalPercent / specimens.length * 10) / 10 + "%";
+  }
+
+  document.getElementById("stat-total").textContent = specimens.length;
+  document.getElementById("stat-acc").textContent = confirmed;
+  document.getElementById("stat-conf").textContent = mean;
+}
+
+loadLog();
+showLog();
+showStats();
